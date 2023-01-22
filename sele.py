@@ -2,7 +2,7 @@ from os import system
 try:
     import selenium
 except:
-    pip install selenium==4.0.0
+    system('pip install selenium==4.0.0')
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,7 +10,21 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 # Start a web driver (e.g. Chrome) and log in to Instagram
 users = []
-driver = webdriver.Chrome('driver/chromedriver.exe')
+from selenium import webdriver
+
+options = webdriver.ChromeOptions()
+options.binary_location = '/usr/bin/chromium-browser'
+options.add_argument('--disable-extensions')
+options.add_argument('--headless')
+options.add_argument('--disable-gpu')
+options.add_argument('--no-sandbox')
+options.add_argument('start-maximized')
+options.add_argument('disable-infobars')
+options.add_argument('--remote-debugging-port=9222')
+#options.binary_location = '/usr/bin/google-chrome'
+
+driver = webdriver.Chrome("/usr/bin/chromedriver",chrome_options=options)
+print('ok')
 driver.get("https://www.instagram.com/accounts/login/")
 sleep(3)
 username_input = driver.find_element_by_name("username")
