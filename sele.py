@@ -1,3 +1,8 @@
+from os import system
+try:
+    import selenium
+except:
+    pip install selenium==4.0.0
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
