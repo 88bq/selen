@@ -121,29 +121,32 @@ def gml():
 
 
     driver = webdriver.Chrome(executable_path="chromedriver", options=options, port=port)
-    
+
     driver.get('https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=SignUp')
     sleep(4)
 
     print('Search about gmail ...')
     for i in user1:
-        if 'profile picture' in i or '_' in i or ' ' in i or len(i) < 5:
-            pass
-        else:
-            driver.find_element_by_css_selector('#username').click()
-            driver.find_element_by_css_selector('#username').send_keys(i)
-            driver.find_element_by_css_selector('#firstName').click()
-            sleep(3)
-            u = driver.page_source
-            #open('kok.txt', 'w', encoding='utf-8').write(u)
-            doc()
-            sleep(1)
-            if 'currentColor' in u:
+        try:
+            if 'profile picture' in i or '_' in i or ' ' in i or len(i) < 5:
                 pass
             else:
-                check(i)
-
-            driver.refresh()
+                driver.find_element_by_css_selector('#username').click()
+                driver.find_element_by_css_selector('#username').send_keys(i)
+                driver.find_element_by_css_selector('#firstName').click()
+                sleep(3)
+                u = driver.page_source
+                #open('kok.txt', 'w', encoding='utf-8').write(u)
+                doc()
+                sleep(1)
+                if 'currentColor' in u:
+                    pass
+                else:
+                    check(i)
+    
+                driver.refresh()
+        except:
+            pass
 
     driver.delete_all_cookies()
 
