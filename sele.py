@@ -39,7 +39,7 @@ def get_user(u, t):
 
     driver4.get(f'https://www.instagram.com/{u}/followers/')
     sleep(4)
-    a = 1
+    a = 0
     while a < t/12:
         try:
 
@@ -118,15 +118,10 @@ def check(use):
 
 
 def gml():
-    
-    
-    driver = webdriver.Chrome(executable_path="chromedriver", options=options, port=port)
-    driver.get('https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=SignUp')
 
-    for cookie in pickle.load(open(f"mn10.zp.pkl", "rb")):
-        driver.add_cookie(cookie)
-    sleep(4)
-    driver.refresh()
+
+    driver = webdriver.Chrome(executable_path="chromedriver", options=options, port=port)
+    
     driver.get('https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=SignUp')
     sleep(4)
 
@@ -140,10 +135,10 @@ def gml():
             driver.find_element_by_css_selector('#firstName').click()
             sleep(3)
             u = driver.page_source
-            open('kok.txt', 'w', encoding='utf-8').write(u)
+            #open('kok.txt', 'w', encoding='utf-8').write(u)
             doc()
             sleep(1)
-            if 'اسم المستخدم هذا مستخدم بالفعل. جرّب اسم مستخدم آخر' in u:
+            if 'currentColor' in u:
                 pass
             else:
                 check(i)
@@ -151,7 +146,6 @@ def gml():
             driver.refresh()
 
     driver.delete_all_cookies()
-
 
 while True:
     try:
