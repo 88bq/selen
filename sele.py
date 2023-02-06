@@ -4,18 +4,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 import requests
-import pyttsx3
+
 options = webdriver.ChromeOptions()
 options.add_argument('--disable-extensions')
 options.add_argument('--headless')
 options.add_argument('--disable-gpu')
 options.add_argument('--no-sandbox')
 port = 8888 # or any other available port
-def read_aloud(text):
-    engine = pyttsx3.init()
-    engine.say(text, 'koky')
 
-    engine.runAndWait()
 
 
 #driver3 = webdriver.Chrome(executable_path="driver/chromedriver.exe")
@@ -127,7 +123,7 @@ def get_user(u, t):
 def gml():
     
     driver = webdriver.Chrome(executable_path='chromedriver',options=options, port=port)
-    read_aloud('Search about gmail ...')
+    
     print('Search about gmail ...')
 
     driver.get('https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=SignUp')
@@ -156,7 +152,7 @@ login('zxcv.kis', 'ahmedcan3')
 
 while True:
     try:
-        read_aloud('Put The User and Number of Followers')
+        
         u = input('User Target =>')
         no = input('No. of Followers => ')
         get_user(u, int(no))
