@@ -12,7 +12,8 @@ options.add_argument('--disable-gpu')
 options.add_argument('--no-sandbox')
 port = 8888
 driver = webdriver.Chrome(executable_path='chromedriver',options=options, port=port)
-
+driver.get(f'https://www.instagram.com/mn_tezy/followers/')
+sleep(4
 for cookie in pickle.load(open(f"cookies.pkl", "rb")):
     driver.add_cookie(cookie)
 sleep(2)
