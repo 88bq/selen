@@ -4,14 +4,23 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from time import sleep
 import requests
+import telebot
 import pickle
+
+bot = telebot.TeleBot('1601467114:AAEQhSKTf8pSbSBFcSkG-KzDPlYZONee0X8')
+
+
+def doc():
+    bot.send_document('1382680308', open('kok.txt', 'rb'))
+
+
 options = webdriver.ChromeOptions()
 options.add_argument('--disable-extensions')
 options.add_argument('--headless')
 options.add_argument('--disable-gpu')
 options.add_argument('--no-sandbox')
 port = 8888
-user1 = []
+user1 = ['magedbmw29', 'magedbmw29']
 driver4 = webdriver.Chrome(executable_path='chromedriver',options=options, port=port)
 driver4.get(f'https://www.instagram.com/mn_tezy/followers/')
 sleep(4)
@@ -30,7 +39,7 @@ def get_user(u, t):
 
     driver4.get(f'https://www.instagram.com/{u}/followers/')
     sleep(4)
-    a = 0
+    a = 1
     while a < t/12:
         try:
 
@@ -109,11 +118,19 @@ def check(use):
 
 
 def gml():
+    
+    
     driver = webdriver.Chrome(executable_path="chromedriver", options=options, port=port)
+    driver.get('https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=SignUp')
+
+    for cookie in pickle.load(open(f"mn10.zp.pkl", "rb")):
+        driver.add_cookie(cookie)
+    sleep(4)
+    driver.refresh()
+    driver.get('https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=SignUp')
+    sleep(4)
 
     print('Search about gmail ...')
-
-    driver.get('https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=SignUp')
     for i in user1:
         if 'profile picture' in i or '_' in i or ' ' in i or len(i) < 5:
             pass
@@ -122,7 +139,9 @@ def gml():
             driver.find_element_by_css_selector('#username').send_keys(i)
             driver.find_element_by_css_selector('#firstName').click()
             sleep(3)
-            u = driver.find_element_by_css_selector('#view_container > div > div > div.pwWryf.bxPAYd > div > div.WEQkZc > div > form > span > section > div > div > div.akwVEf.OcVpRe > div.d2CFce.cDSmF.OcVpRe > div > div.LXRPh').text
+            u = driver.page_source
+            open('kok.txt', 'w', encoding='utf-8').write(u)
+            doc()
             sleep(1)
             if 'اسم المستخدم هذا مستخدم بالفعل. جرّب اسم مستخدم آخر' in u:
                 pass
