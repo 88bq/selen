@@ -98,7 +98,7 @@ def get_user(u, t):
     while a < t/12:
         try:
 
-            following_panel = driver4.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[2]')
+            following_panel = driver4.find_element_by_class_name('_aano')
             ht = driver4.execute_script(""" 
         arguments[0].scrollTo(0, arguments[0].scrollHeight);
         return arguments[0].scrollHeight; """, following_panel)
@@ -149,13 +149,6 @@ def gml():
 
 
 login('zxcv.kis', 'ahmedcan3')
-
-while True:
-    try:
-        
-        u = input('User Target =>')
-        no = input('No. of Followers => ')
-        get_user(u, int(no))
-        gml()
-    except:
-        pass
+driver4.get('https://www.instagram.com/nayelislovesyah/followers/')
+sleep(5)
+print(driver4.page_source)
